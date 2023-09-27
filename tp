@@ -1,3 +1,4 @@
+
 --[[
     Notes: 
 
@@ -42,12 +43,12 @@ local player = players.LocalPlayer;
 
 local dependencies = {
     variables = {
-        up_vector = Vector3.new(0, 200, 0),
+        up_vector = Vector3.new(0, 500, 0),
         raycast_params = RaycastParams.new(),
-        path = pathfinding_service:CreatePath({WaypointSpacing = 20}),
-        player_speed = 25, 
-        vehicle_speed = 500,
-        teleporting = true,
+        path = pathfinding_service:CreatePath({WaypointSpacing = 3}),
+        player_speed = 150, 
+        vehicle_speed = 450,
+        teleporting = false,
         stopVelocity = false
     },
     modules = {
@@ -60,7 +61,7 @@ local dependencies = {
     },
     helicopters = { Heli = true }, -- heli is included in free vehicles
     motorcycles = { Volt = true }, -- volt type is "custom" but works the same as a motorcycle
-    free_vehicles = { Camaro = true },{Heli = true},
+    free_vehicles = { Camaro = true },
     unsupported_vehicles = { SWATVan = true },
     door_positions = { }    
 };
@@ -165,7 +166,7 @@ function movement:move_to_position(part, cframe, speed, car, target_vehicle, tri
         task.wait(0.5);
     end;
     
-    local y_level = 1000;
+    local y_level = 500;
     local higher_position = Vector3.new(vector_position.X, y_level, vector_position.Z); -- 500 studs above target position
 
     repeat -- use velocity to move towards the target position
@@ -312,15 +313,15 @@ local function teleport(cframe, tried) -- unoptimized
 
                 dependencies.variables.stopVelocity = true;
 
-                local enter_attempts = 1;
+                local enter_attempts = 5;
 
                 repeat -- attempt to enter car
                     nearest_vehicle:Callback(true)
                     
-                    enter_attempts = enter_attempts + 1;
+                    enter_attempts = enter_attempts + 5;
 
                     task.wait(0.1);
-                until enter_attempts == 10 or vehicle_object.Seat.PlayerName.Value == player.Name;
+                until enter_attempts == 15 or vehicle_object.Seat.PlayerName.Value == player.Name;
 
                 dependencies.variables.stopVelocity = false;
 
@@ -335,11 +336,6 @@ local function teleport(cframe, tried) -- unoptimized
 
             repeat -- attempt to exit car
                 task.wait(0.15);
-               
-            until vehicle_object.Seat.PlayerName.Value ~= player.Name;
-        end;
-        repeat -- attempt to exit car
-                task.wait(0.15);
                 dependencies.modules.character_util.OnJump();
             until vehicle_object.Seat.PlayerName.Value ~= player.Name;
         end;
@@ -352,3 +348,6 @@ local function teleport(cframe, tried) -- unoptimized
 end;
 
 return teleport;
+
+
+ 

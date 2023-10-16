@@ -82,7 +82,7 @@ end;
 
 function utilities:get_nearest_vehicle(tried) -- unoptimized
     local nearest;
-    local distance = math.huge;
+    local distance = 200;
 
     for index, action in next, dependencies.modules.ui.CircleAction.Specs do -- all of the interations
         if action.IsVehicle and action.ShouldAllowEntry == true and action.Enabled == true and action.Name == "Enter Driver" then -- if the interaction is to enter the driver seat of a vehicle
@@ -145,11 +145,17 @@ function movement:pathfind(tried)
 
                 return;
             end;
+else
+if path.Status == Enum.PathStatus.Fail then -- if path making has failed
+game.Players.LocalPlayer.Character.Humanoid.Health = 0
+
+
+
 
             task.wait(0.05);
         end;
     end;
-
+end;
     utilities:toggle_door_collision(nearest.instance, true);
 
     movement:pathfind(tried);

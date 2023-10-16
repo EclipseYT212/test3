@@ -45,8 +45,8 @@ local dependencies = {
         up_vector = Vector3.new(0, 100, 0),
         raycast_params = RaycastParams.new(),
         path = pathfinding_service:CreatePath({WaypointSpacing = 3}),
-        player_speed = 150, 
-        vehicle_speed = 350,
+        player_speed = v, 
+        vehicle_speed = b,
         teleporting = false,
         stopVelocity = false
     },

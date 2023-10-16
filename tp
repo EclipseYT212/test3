@@ -145,17 +145,12 @@ function movement:pathfind(tried)
 
                 return;
             end;
-else
-if path.Status == Enum.PathStatus.Fail then -- if path making has failed
-game.Players.LocalPlayer.Character.Humanoid.Health = 0
-
-
 
 
             task.wait(0.05);
         end;
     end;
-end;
+
     utilities:toggle_door_collision(nearest.instance, true);
 
     movement:pathfind(tried);

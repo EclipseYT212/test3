@@ -312,7 +312,7 @@ local function teleport(cframe, tried) -- unoptimized
 
                 dependencies.variables.stopVelocity = true;
 
-                local enter_attempts = 1;
+                local enter_attempts = 3;
 
                 repeat -- attempt to enter car
                     nearest_vehicle:Callback(true)

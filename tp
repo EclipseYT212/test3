@@ -138,7 +138,7 @@ function movement:pathfind(tried)
         for index = 1, #waypoints do 
             local waypoint = waypoints[index];
             
-            player.Character.HumanoidRootPart.CFrame = CFrame.new(waypoint.Position + Vector3.new(0, 50, 0)); -- walking movement is less optimal
+            player.Character.HumanoidRootPart.CFrame = CFrame.new(waypoint.Position + Vector3.new(0, 2.5, 0)); -- walking movement is less optimal
 
             if not workspace:Raycast(player.Character.HumanoidRootPart.Position, dependencies.variables.up_vector, dependencies.variables.raycast_params) then -- if there is nothing above the player
                 utilities:toggle_door_collision(nearest.instance, true);
@@ -165,7 +165,7 @@ function movement:move_to_position(part, cframe, speed, car, target_vehicle, tri
         task.wait(0.5);
     end;
     
-    local y_level = 700;
+    local y_level = 500;
     local higher_position = Vector3.new(vector_position.X, y_level, vector_position.Z); -- 500 studs above target position
 
     repeat -- use velocity to move towards the target position
@@ -289,7 +289,7 @@ local function teleport(cframe, tried) -- unoptimized
     local relative_position = (cframe.Position - player.Character.HumanoidRootPart.Position);
     local target_distance = relative_position.Magnitude;
 
-    if target_distance <= 10 and not workspace:Raycast(player.Character.HumanoidRootPart.Position, relative_position.Unit * target_distance, dependencies.variables.raycast_params) then 
+    if target_distance <= 20 and not workspace:Raycast(player.Character.HumanoidRootPart.Position, relative_position.Unit * target_distance, dependencies.variables.raycast_params) then 
         player.Character.HumanoidRootPart.CFrame = cframe; 
         
         return;
@@ -312,7 +312,7 @@ local function teleport(cframe, tried) -- unoptimized
 
                 dependencies.variables.stopVelocity = true;
 
-                local enter_attempts = 5;
+                local enter_attempts = 1;
 
                 repeat -- attempt to enter car
                     nearest_vehicle:Callback(true)

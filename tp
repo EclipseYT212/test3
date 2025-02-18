@@ -47,7 +47,7 @@ local dependencies = {
         path = pathfinding_service:CreatePath({WaypointSpacing = 3}),
         player_speed = 60, 
         vehicle_speed = 400,
-        teleporting = true,
+        teleporting = false,
         stopVelocity = true
     },
     modules = {

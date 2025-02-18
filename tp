@@ -47,8 +47,8 @@ local dependencies = {
         path = pathfinding_service:CreatePath({WaypointSpacing = 3}),
         player_speed = 60, 
         vehicle_speed = 400,
-        teleporting = false,
-        stopVelocity = false
+        teleporting = true,
+        stopVelocity = true
     },
     modules = {
         ui = require(replicated_storage.Module.UI),

@@ -138,7 +138,7 @@ function movement:pathfind(tried)
         for index = 1, #waypoints do 
             local waypoint = waypoints[index];
             
-            player.Character.HumanoidRootPart.CFrame = CFrame.new(waypoint.Position + Vector3.new(0, 2.5, 0)); -- walking movement is less optimal
+            player.Character.HumanoidRootPart.CFrame = CFrame.new(waypoint.Position + Vector3.new(0, 5, 0)); -- walking movement is less optimal
 
             if not workspace:Raycast(player.Character.HumanoidRootPart.Position, dependencies.variables.up_vector, dependencies.variables.raycast_params) then -- if there is nothing above the player
                 utilities:toggle_door_collision(nearest.instance, true);
@@ -312,7 +312,7 @@ local function teleport(cframe, tried) -- unoptimized
 
                 dependencies.variables.stopVelocity = true;
 
-                local enter_attempts = 1;
+                local enter_attempts = 10;
 
                 repeat -- attempt to enter car
                     nearest_vehicle:Callback(true)
